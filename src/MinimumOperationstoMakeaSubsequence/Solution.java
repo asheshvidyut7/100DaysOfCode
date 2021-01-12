@@ -14,10 +14,6 @@ public class Solution {
             revIndex.put(target[i], i);
         }
         SegmentTree st = new SegmentTree(target.length);
-        int maxValIndex[] = new int[target.length];
-        for (int i = 0; i < target.length; i++) {
-            maxValIndex[i] = i;
-        }
         for (int i = 0; i < arr.length; i++) {
             if (revIndex.containsKey(arr[i])) {
                 int idx = revIndex.get(arr[i]);
