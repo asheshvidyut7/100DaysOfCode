@@ -13,11 +13,11 @@ public class Solution {
 
         int MAX_BIT = 35;
 
-        public void insert(int num) {
-            root = insertTrie(num, root, MAX_BIT);
+        public void insert(long num) {
+            root = insertTrie(num << 1, root, MAX_BIT);
         }
-        public TrieNode insertTrie(int n, TrieNode node, int bitPos) {
-            if (bitPos == -2) {
+        public TrieNode insertTrie(long n, TrieNode node, int bitPos) {
+            if (bitPos == -1) {
                 return null;
             }
             int bitAtPosition = ((n & (1L << bitPos)) != 0) ? 1 : 0;
@@ -28,14 +28,14 @@ public class Solution {
             return node;
         }
 
-        public long query(int num) {
-            return queryTree(num, root, MAX_BIT, 0L);
+        public long query(long num) {
+            return queryTree(num << 1, root, MAX_BIT, 0L) >> 1;
         }
 
-        public long queryTree(int n, TrieNode node, int bitPos, long ans) {
+        public long queryTree(long n, TrieNode node, int bitPos, long ans) {
             if (node == null)
                 return ans;
-            if (bitPos == -2) {
+            if (bitPos == -1) {
                 return ans;
             }
             int bitAtPosition = ((n & (1L << bitPos)) != 0) ? 1 : 0;
@@ -51,11 +51,11 @@ public class Solution {
         for (int i = 0; i < nums.length; i++) {
             trie.insert(nums[i]);
         }
-        long ans = Integer.MIN_VALUE;
+        long ans = Long.MIN_VALUE;
         for (int i = 0; i < nums.length; i++) {
             ans = Math.max(ans, trie.query(nums[i]));
         }
-        return (int)ans;
+        return (int)(ans);
     }
 
     public static void main(String[] args) {
